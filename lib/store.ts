@@ -73,9 +73,15 @@ export async function mutate<T>(id: string, fn: (s: State) => T): Promise<T> {
   throw new Error("The sandbox is busy, please try again");
 }
 
+/** Creates a sandbox now, so a visitor who chose "set up my business" starts in that mode. */
+export async function create(id: string, mode: "sample" | "own"): Promise<void> {
+  if (!SANDBOX_ID.test(id)) throw new Error("Invalid sandbox id");
+  await write(id, seed(undefined, mode), 0);
+}
+
 export async function reset(id: string): Promise<void> {
   await mutate(id, (s) => {
-    const fresh = seed();
+    const fresh = seed(undefined, s.setup?.mode ?? "sample");
     Object.assign(s, fresh);
   });
 }

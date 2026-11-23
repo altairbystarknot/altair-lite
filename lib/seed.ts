@@ -32,23 +32,23 @@ function rates(): Rate[] {
   return out;
 }
 
-export function seed(today = todayISO()): State {
+export function seed(today = todayISO(), mode: "sample" | "own" = "sample"): State {
   const d = (n: number) => addDays(today, n);
   const bookings: Booking[] = [
-    { code: "CBR-1041", kind: "transfer", customer: "Laura Méndez", country: "United States", adults: 2, children: 1, date: d(0), time: "10:30", from: "sjo", to: "fortuna", vehicle: "van", total: 220, status: "confirmed", driver: "carlos", notes: "Flight AA 1489 lands 09:55" },
-    { code: "CBR-1042", kind: "tour", customer: "Sofía Rojas", country: "Costa Rica", adults: 4, children: 2, date: d(0), time: "14:00", activity: "sloths", pickup: "Hotel Arenal Kioro", total: 340, status: "confirmed", driver: null },
-    { code: "CBR-1043", kind: "transfer", customer: "James Carter", country: "Canada", adults: 2, children: 0, date: d(1), time: "06:00", from: "fortuna", to: "monteverde", vehicle: "sedan", total: 150, status: "confirmed", driver: null },
-    { code: "CBR-1044", kind: "transfer", customer: "Familie Weber", country: "Germany", adults: 5, children: 2, date: d(1), time: "09:00", from: "sjo", to: "manuelantonio", vehicle: "minibus", total: 335, status: "confirmed", driver: "luis" },
-    { code: "CBR-1045", kind: "tour", customer: "Akira Tanaka", country: "Japan", adults: 2, children: 0, date: d(1), time: "05:30", activity: "birds", pickup: "Hotel Belmar, Monteverde", total: 130, status: "confirmed", driver: null },
-    { code: "CBR-1046", kind: "transfer", customer: "Andrés Solano", country: "Costa Rica", adults: 2, children: 0, date: d(1), time: "14:00", from: "lir", to: "tamarindo", vehicle: "sedan", total: 85, status: "request", driver: null, notes: "Asked for a child seat" },
-    { code: "CBR-1047", kind: "tour", customer: "Emma Dubois", country: "France", adults: 2, children: 1, date: d(2), time: "08:00", activity: "snorkel", pickup: "Tamarindo center", total: 185, status: "confirmed", driver: null },
-    { code: "CBR-1048", kind: "transfer", customer: "Marco Bianchi", country: "Italy", adults: 3, children: 0, date: d(2), time: "11:15", from: "monteverde", to: "manuelantonio", vehicle: "sedan", total: 215, status: "confirmed", driver: "marta" },
-    { code: "CBR-1049", kind: "transfer", customer: "Olivia Brown", country: "United Kingdom", adults: 6, children: 0, date: d(3), time: "16:40", from: "tamarindo", to: "lir", vehicle: "van", total: 110, status: "confirmed", driver: null },
-    { code: "CBR-1050", kind: "tour", customer: "Lucas Silva", country: "Brazil", adults: 2, children: 2, date: d(4), time: "18:00", activity: "night", pickup: "Hotel Belmar, Monteverde", total: 156, status: "confirmed", driver: null },
-    { code: "CBR-1038", kind: "transfer", customer: "Noah Wilson", country: "United States", adults: 2, children: 0, date: d(-1), time: "13:00", from: "manuelantonio", to: "sjo", vehicle: "sedan", total: 187, status: "confirmed", driver: "ana" },
+    { code: "CBR-1041", kind: "transfer", customer: "Laura Méndez", country: "United States", adults: 2, children: 1, date: d(0), time: "10:30", from: "sjo", to: "fortuna", vehicle: "van", total: 220, status: "confirmed", source: "sample", driver: "carlos", notes: "Flight AA 1489 lands 09:55" },
+    { code: "CBR-1042", kind: "tour", customer: "Sofía Rojas", country: "Costa Rica", adults: 4, children: 2, date: d(0), time: "14:00", activity: "sloths", pickup: "Hotel Arenal Kioro", total: 340, status: "confirmed", source: "sample", driver: null },
+    { code: "CBR-1043", kind: "transfer", customer: "James Carter", country: "Canada", adults: 2, children: 0, date: d(1), time: "06:00", from: "fortuna", to: "monteverde", vehicle: "sedan", total: 150, status: "confirmed", source: "sample", driver: null },
+    { code: "CBR-1044", kind: "transfer", customer: "Familie Weber", country: "Germany", adults: 5, children: 2, date: d(1), time: "09:00", from: "sjo", to: "manuelantonio", vehicle: "minibus", total: 335, status: "confirmed", source: "sample", driver: "luis" },
+    { code: "CBR-1045", kind: "tour", customer: "Akira Tanaka", country: "Japan", adults: 2, children: 0, date: d(1), time: "05:30", activity: "birds", pickup: "Hotel Belmar, Monteverde", total: 130, status: "confirmed", source: "sample", driver: null },
+    { code: "CBR-1046", kind: "transfer", customer: "Andrés Solano", country: "Costa Rica", adults: 2, children: 0, date: d(1), time: "14:00", from: "lir", to: "tamarindo", vehicle: "sedan", total: 85, status: "request", source: "sample", driver: null, notes: "Asked for a child seat" },
+    { code: "CBR-1047", kind: "tour", customer: "Emma Dubois", country: "France", adults: 2, children: 1, date: d(2), time: "08:00", activity: "snorkel", pickup: "Tamarindo center", total: 185, status: "confirmed", source: "sample", driver: null },
+    { code: "CBR-1048", kind: "transfer", customer: "Marco Bianchi", country: "Italy", adults: 3, children: 0, date: d(2), time: "11:15", from: "monteverde", to: "manuelantonio", vehicle: "sedan", total: 215, status: "confirmed", source: "sample", driver: "marta" },
+    { code: "CBR-1049", kind: "transfer", customer: "Olivia Brown", country: "United Kingdom", adults: 6, children: 0, date: d(3), time: "16:40", from: "tamarindo", to: "lir", vehicle: "van", total: 110, status: "confirmed", source: "sample", driver: null },
+    { code: "CBR-1050", kind: "tour", customer: "Lucas Silva", country: "Brazil", adults: 2, children: 2, date: d(4), time: "18:00", activity: "night", pickup: "Hotel Belmar, Monteverde", total: 156, status: "confirmed", source: "sample", driver: null },
+    { code: "CBR-1038", kind: "transfer", customer: "Noah Wilson", country: "United States", adults: 2, children: 0, date: d(-1), time: "13:00", from: "manuelantonio", to: "sjo", vehicle: "sedan", total: 187, status: "confirmed", source: "sample", driver: "ana" },
   ];
   return {
-    business: { name: "Costa Brisa (demo)", currency: "USD", timezone: TIMEZONE, prefix: "CBR", phone: "+506 0000 0000", email: "hello@costabrisa.example" },
+    business: { name: "Costa Brisa (demo)", currency: "USD", timezone: TIMEZONE, prefix: "CBR", phone: "+506 0000 0000", email: "hello@costabrisa.example", color: "#16766b", logo: null, tagline: "Private transfers and tours in Costa Rica" },
     zones: [
       { id: "sjo", name: "SJO airport (San José)", kind: "airport", aliases: ["sjo", "juan santamaria", "san jose airport", "alajuela"] },
       { id: "lir", name: "LIR airport (Liberia)", kind: "airport", aliases: ["lir", "liberia", "guanacaste airport"] },
@@ -80,5 +80,6 @@ export function seed(today = todayISO()): State {
     drafts: [],
     log: [{ id: "l0", at: nowISO(), actor: "system", text: "Sandbox created with sample data for Costa Brisa (demo)." }],
     seededOn: today,
+    setup: { mode },
   };
 }

@@ -29,4 +29,12 @@ await call("propose_rate_change", { percent: 10, vehicle: "Van", reason: "High s
 await call("list_drafts", { status: "pending" });
 await call("draft_customer_message", { code: "CBR-1043", kind: "driver", language: "es" });
 await call("booking_details", { code: "CBR-9999" });
+await call("setup_checklist");
+await call("update_business_profile", { name: "Pacific Shuttle Co.", booking_prefix: "PSC", brand_color: "#7a3cc2" });
+await call("create_booking", { type: "transfer", customer: "Ana Ruiz", date: "tomorrow", time: "10:30", adults: 2, from: "SJO airport", to: "La Fortuna", notes: "From WhatsApp" });
+await call("quote_tour", { tour: "Sloth", date: "tomorrow", adults: 2, children: 1 });
+await call("add_tour", { name: "Sunset catamaran", place: "Tamarindo", adult_price: 85, child_price: 60, times: ["15:00"], seats: 20, duration: "3 h", reason: "New for the season" });
+await call("add_driver", { name: "José", vehicle: "Van", languages: ["es", "en"] });
+await call("import_rates", { rates: [{ from: "SJO airport", to: "Jacó", vehicle: "Sedan", price: 120 }, { from: "SJO airport", to: "Jacó", vehicle: "Van", price: 150 }, { from: "Jacó", to: "Manuel Antonio", vehicle: "Van", price: 130 }], vehicles: [{ name: "Sedan", seats: 3 }, { name: "Van", seats: 9 }], reason: "Rates from the 2027 sheet" });
+await call("list_drafts", { status: "pending" });
 console.log("\nsmoke ok");

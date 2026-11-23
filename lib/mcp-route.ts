@@ -1,4 +1,5 @@
 import { handle, type RpcReq } from "./mcp";
+import { linksFor, originOf } from "./links";
 import { SANDBOX_ID } from "./store";
 
 // HTTP glue for the MCP endpoint: JSON-RPC over POST, answered as JSON. GET (server-sent events) is not
@@ -21,11 +22,12 @@ export async function mcpPost(req: Request, sandbox: string) {
   } catch {
     return json({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "Parse error" } }, 400);
   }
+  const ctx = { sandbox, links: linksFor(originOf(req.headers), sandbox) };
   if (Array.isArray(body)) {
-    const out = (await Promise.all(body.map((m) => handle(sandbox, m as RpcReq)))).filter(Boolean);
+    const out = (await Promise.all(body.map((m) => handle(ctx, m as RpcReq)))).filter(Boolean);
     return out.length ? json(out) : new Response(null, { status: 202, headers: CORS });
   }
-  const res = await handle(sandbox, body as RpcReq);
+  const res = await handle(ctx, body as RpcReq);
   return res ? json(res) : new Response(null, { status: 202, headers: CORS });
 }
 

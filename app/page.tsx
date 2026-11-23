@@ -13,7 +13,7 @@ export default function Home() {
           <Wordmark />
           <nav>
             <a className="btn ghost sm" href={GITHUB} target="_blank" rel="noopener noreferrer">GitHub</a>
-            <Link className="btn primary sm" href="/new">Open my sandbox</Link>
+            <Link className="btn primary sm" href="/new?setup=1">Set up my business</Link>
           </nav>
         </header>
 
@@ -22,15 +22,15 @@ export default function Home() {
             <p className="kicker"><Star /> Open demo · Altair by Starknot</p>
             <h1 className="display">Run a tourism business from <em className="serif">your own Claude.</em></h1>
             <p className="lede">
-              Altair Lite gives you a private sandbox of a small transfer and tour company, with sample bookings, drivers and
-              rates. Connect it to Claude in one step, ask in plain words, and watch the panel change while Claude works.
-              Price changes are drafts that you approve.
+              Set up a private sandbox of your transfer and tour company in minutes: your logo and colors, your rates straight
+              from Excel, your tours and drivers. You get a panel, a booking page for travelers and a connector for your own
+              Claude. Ask in plain words and watch the panel change while Claude works; prices are drafts you approve.
             </p>
             <div className="actions">
-              <Link className="btn primary" href="/new">Open my sandbox <span aria-hidden="true">→</span></Link>
-              <a className="btn ghost" href={GITHUB} target="_blank" rel="noopener noreferrer">Read the code</a>
+              <Link className="btn primary" href="/new?setup=1">Set up my business <span aria-hidden="true">→</span></Link>
+              <Link className="btn ghost" href="/new">Explore the sample business</Link>
             </div>
-            <p className="note">No sign-up, no payment, sample data only. <Continue /></p>
+            <p className="note">Free, no sign-up, no payment. Sample data fills whatever you skip. <Continue /></p>
           </div>
           <div className="mock" aria-hidden="true">
             <div className="cardx">
@@ -44,24 +44,25 @@ export default function Home() {
               </div>
             </div>
             <div className="cardx">
-              <div className="msg-u">Raise Van rates 10%. I&apos;ll approve it.</div>
-              <span className="tool">altair-lite · propose_rate_change</span>
-              <div className="msg-c"><b>Draft D-01 ready</b> · 24 Van rates. Nothing changes until you approve it in the panel.</div>
+              <div className="msg-u">Here is my 2027 rate sheet (rates.xlsx). Load it.</div>
+              <span className="tool">altair-lite · import_rates</span>
+              <div className="msg-c"><b>Draft D-01 ready</b> · 96 rates, 14 places, 3 vehicles from your sheet. Approve it in the panel and your booking page uses them.</div>
             </div>
           </div>
         </section>
 
-        <section className="steps" aria-label="How it works">
-          <div className="step"><i>01</i><h3>Open a sandbox</h3><p>Your own copy of Costa Brisa (demo), with bookings around today, four drivers and a rate table.</p></div>
-          <div className="step"><i>02</i><h3>Add it to Claude</h3><p>Copy your connector URL into Claude → Settings → Connectors → Add custom connector. No keys, no sign-in.</p></div>
-          <div className="step"><i>03</i><h3>Ask, and approve</h3><p>Claude reads the day, quotes, assigns drivers and drafts messages. Rate changes wait for your approval.</p></div>
+        <section className="steps four" aria-label="How it works">
+          <div className="step"><i>01</i><h3>Make it yours</h3><p>Name, logo and brand color. A guided setup; sample bookings, drivers and rates fill whatever you skip.</p></div>
+          <div className="step"><i>02</i><h3>Load your rates</h3><p>Drop the Excel or CSV you already use: places, vehicles and prices are read for you. Then your tours and drivers.</p></div>
+          <div className="step"><i>03</i><h3>Connect your Claude</h3><p>Paste your connector URL in Claude → Settings → Connectors. Claude can even finish the setup for you.</p></div>
+          <div className="step"><i>04</i><h3>Take a booking</h3><p>Share your booking page. A traveler books, the request lands in your panel, Claude helps you run the day.</p></div>
         </section>
       </div>
 
       <section className="band">
         <div className="wrap">
           <p className="kicker">The connector</p>
-          <h2 className="h2">Ten tools, <em className="serif">one small business.</em></h2>
+          <h2 className="h2">{TOOLS.length} tools, <em className="serif">one small business.</em></h2>
           <p className="lede">A remote MCP server with no dependencies, built for Claude. Read tools never change anything; the rest are logged in the panel.</p>
           <div className="tools">
             {TOOLS.map((t) => (
@@ -80,9 +81,9 @@ export default function Home() {
           <div className="box">
             <h3>What Altair Lite is</h3>
             <ul>
-              <li>An open, experimental demo of the idea behind Altair: the owner runs the business from their own Claude.</li>
-              <li>A private sandbox per visitor, sample data only, reset any time.</li>
-              <li>Simplified on purpose: one price per route and vehicle, no payments, no real messages.</li>
+              <li>An open, experimental demo of the idea behind Altair: the owner runs the business from their own Claude, and a person approves what matters.</li>
+              <li>A private sandbox per visitor with your logo, rates, tours and team, a panel and a booking page. Reset any time.</li>
+              <li>Simplified on purpose: one price per route and vehicle, no payments, no accounts, no real messages. Use test data.</li>
             </ul>
           </div>
           <div className="box warm">

@@ -13,13 +13,20 @@ to Claude in one step, ask in plain words, and watch the panel change while Clau
 
 ## How it works
 
-1. **Open a sandbox** at [altair-lite.vercel.app](https://altair-lite.vercel.app). You get your own copy of
-   *Costa Brisa (demo)*: bookings placed around today, four drivers, three vehicles and a rate table.
-2. **Add it to Claude.** Copy your connector URL from the panel (`https://altair-lite.vercel.app/mcp/<your-sandbox>`)
-   into **Claude → Settings → Connectors → Add custom connector**. No sign-in is needed.
-3. **Ask.** "What's on tomorrow, and who still needs a driver?" · "Assign drivers without clashing times." ·
-   "Quote SJO airport to La Fortuna for 5." · "Raise Van rates 10% as a draft." The panel refreshes every few seconds,
-   so you see Claude's work as it happens. **Price changes are drafts**: nothing changes until you approve them.
+1. **Set up your business, or explore the sample.** [Set up my business](https://altair-lite.vercel.app/new?setup=1)
+   opens a guided setup; [the sample](https://altair-lite.vercel.app/new) opens *Costa Brisa (demo)* as it is. Either way
+   the sandbox starts with sample bookings, drivers, rates and tours, so everything works from minute one.
+2. **Make it yours.** Name, logo (the brand color is suggested from it), WhatsApp and booking code prefix. Drop the
+   **Excel (.xlsx) or CSV** you already use for your rates: places, vehicles and prices are read in the browser, with
+   Spanish or English headers, one row per route or one row per price. Then your tours and drivers.
+3. **Connect your own Claude.** Copy your connector URL from the panel (`https://altair-lite.vercel.app/mcp/<your-sandbox>`)
+   into **Claude → Settings → Connectors → Add custom connector**. No sign-in, no keys. Claude can finish the setup for
+   you: share your rate sheet in the chat and it loads it as a draft you approve.
+4. **Take a booking.** Your sandbox has a **booking page** with your logo, colors, routes, prices and tours with real
+   seats. A traveler requests a transfer or a tour and it lands in the panel within seconds, ready to confirm.
+5. **Ask.** "What's on tomorrow, and who still needs a driver?" · "Assign drivers without clashing times." ·
+   "Add this WhatsApp booking as a request." · "Raise Van rates 10% as a draft." **Prices, rate sheets and new tours
+   are drafts**: nothing changes until a person approves them.
 
 ## The connector (MCP)
 
@@ -29,16 +36,23 @@ in the panel's activity feed.
 
 | Tool | What it does |
 |---|---|
-| `business_overview` | Today and tomorrow, services without a driver, requests, drafts, what is booked |
+| `business_overview` | Today and tomorrow, services without a driver, requests (including the booking page), drafts, setup progress |
 | `day_schedule` | Every service of one day, in time order |
 | `find_bookings` | Search by customer, code, place or tour |
 | `booking_details` | One booking by its code |
 | `quote_transfer` | Price per vehicle that fits the group |
+| `quote_tour` | Tour price for a group and seats left per departure |
+| `create_booking` | Turns a WhatsApp or email message into a booking request (price from the business's own rates) |
 | `list_drivers` | Drivers, vehicles, languages and their day |
 | `assign_driver` | Assigns a driver; refuses time clashes and vehicles that are too small |
 | `propose_rate_change` | Prepares a rate change as a **draft** for a person to approve |
 | `list_drafts` | Drafts and their status |
 | `draft_customer_message` | A confirmation, reminder or driver message (EN/ES), never sent |
+| `setup_checklist` | What is set up and what is missing, with how to do each step |
+| `update_business_profile` | Name, tagline, WhatsApp, email, booking prefix, brand color |
+| `import_rates` | Loads the owner's rate sheet as **one draft** that replaces places, vehicles and rates when approved |
+| `add_tour` | A new or updated tour as a **draft** |
+| `add_driver` | Adds a driver with vehicle and languages |
 
 There is also a shared sandbox at `https://altair-lite.vercel.app/mcp` for a quick try.
 
@@ -62,10 +76,10 @@ as a custom connector.
 
 ## What Altair Lite is, and is not
 
-- An **experimental demo**, built in a few hours with Claude Code for the Dojo AI Hackathon 2026, to show the idea:
-  the owner runs the business from their own Claude, and a person approves what matters.
+- An **experimental demo**, built with Claude Code for the Dojo AI Hackathon 2026, to show the idea: the owner runs
+  the business from their own Claude, and a person approves what matters.
 - **Simplified on purpose**: one price per route and vehicle, no payments, no real messages, no accounts. It is not
-  Altair's engine.
+  Altair's engine. Use sample or test data: the sandbox URL is its only key.
 - Each sandbox is private by its long random id. Anyone with the URL can use that sandbox, which only holds sample
   data. Sandboxes nobody touches for two weeks are forgotten.
 
