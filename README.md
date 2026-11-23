@@ -9,7 +9,14 @@ to Claude in one step, ask in plain words, and watch the panel change while Clau
   no sign-up, no keys, sample data only
 </p>
 
-![The Altair Lite panel: services, rates, a rate-change draft prepared by Claude waiting for approval, and the connector URL](docs/panel.jpg)
+![The Altair Lite panel: new requests from the booking page, services with drivers, the Claude connector and a rate-change draft prepared by Claude waiting for approval](docs/panel.jpg)
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/setup.jpg" alt="Guided setup: a rate sheet in Excel read in the browser, with places, vehicles and prices"><br><sub><b>Guided setup.</b> Your logo, colors and the Excel you already use for your rates.</sub></td>
+    <td width="50%"><img src="docs/booking.jpg" alt="The business's own booking page with its colors, routes and prices per vehicle"><br><sub><b>Your booking page.</b> Travelers request transfers and tours; requests land in the panel live.</sub></td>
+  </tr>
+</table>
 
 ## How it works
 
